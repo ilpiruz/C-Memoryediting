@@ -1,0 +1,47 @@
+using System;              
+using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace BytePatcher
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filePath = "file.exe"; // File Name / location+name
+            long offset = 0x0000000F; // Address
+            byte newValue = 0x74; // New value
+
+            try
+            {
+                // Opens file in read&write
+                using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    // Go to that offset
+                    fileStream.Seek(offset, SeekOrigin.Begin);
+
+                    // Write new value
+                    fileStream.WriteByte(newValue);
+
+                    Console.WriteLine("Successfully edited byte");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"error: {ex.Message}");
+            }
+        }
+    }
+}

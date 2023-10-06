@@ -1,0 +1,45 @@
+using System;            
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        string filePath = "percorso_del_tuo_file.bin"; // File Name / location+name
+        long offset = 0x000000F; // Address
+
+        try
+        {
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+               
+                if (offset >= 0 && offset < fileStream.Length)
+                {
+                 
+                    fileStream.Seek(offset, SeekOrigin.Begin);
+
+             
+                    int byteValue = fileStream.ReadByte();
+
+                  
+                    if (byteValue != -1)
+                    {
+                        Console.WriteLine($"byte at 0x{offset:X} address is : 0x{byteValue:X}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Impossible to read.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Address is out of the file.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+        }
+    }
+}
