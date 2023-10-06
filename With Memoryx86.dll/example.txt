@@ -14,7 +14,7 @@ float Value = memory.ReadFloat("GameAssembly.dll+020217E8,5C,0,1C,14"); //Readin
 }
 void Write()
 {
-memory.WriteMemory("UnityPlayer.dll+0x12E0317", "bytes", "90 90 90"); //writes <90 90 90> "bytes" into address + offset(can also be float, byte, int, double or string) into that
+memory.WriteMemory("UnityPlayer.dll+0x12E0317", "bytes", "90 90 90"); //writes <90 90 90> "bytes" into address + offset(can also be float, byte, int, double or string)
 }
 }
 }
